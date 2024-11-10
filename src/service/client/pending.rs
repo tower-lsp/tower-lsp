@@ -63,6 +63,7 @@ impl Pending {
 
 impl Debug for Pending {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        #[allow(unused)]
         #[derive(Debug)]
         struct Waiters(usize);
 

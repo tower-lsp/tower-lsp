@@ -3,12 +3,17 @@ name: ci
 on:
   push:
     branches:
-    - master
+    - main
     - release/*
   pull_request:
     branches:
-    - master
+    - main
     - release/*
+env:
+  CARGO_INCREMENTAL: 0
+  CI: 1
+  RUST_BACKTRACE: short
+  RUSTFLAGS: "-D warnings"
 
 jobs:
   cargo-test:
@@ -18,13 +23,13 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        rust-version: [1.64.0, beta, nightly]
+        rust-version: [stable, beta, nightly]
         runtime: [runtime-tokio, runtime-agnostic]
         include:
         - rust-version: nightly
           continue-on-error: true
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Install Rust toolchain
       uses: dtolnay/rust-toolchain@master
       with:
@@ -38,36 +43,36 @@ jobs:
     name: cargo audit
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions-rs/audit-check@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v4
+    - id: install-rust
+      name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+    - name: install-audit
+      run: cargo install cargo-audit --locked
+    - name: run cargo audit
+      run: cargo audit
 
   cargo-clippy:
     name: cargo clippy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - id: install-rust
       name: Install Rust toolchain
-      uses: dtolnay/rust-toolchain@1.64.0
+      uses: dtolnay/rust-toolchain@1.82.0
       with:
         components: clippy
     - name: Run cargo clippy
-      uses: actions-rs/clippy-check@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        toolchain: ${{ steps.install-rust.outputs.name }}
-        args: --all-targets --features proposed -- -D warnings
+      run: cargo clippy
 
   cargo-fmt:
     name: cargo fmt
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - id: install-rust
       name: Install Rust toolchain
-      uses: dtolnay/rust-toolchain@1.64.0
+      uses: dtolnay/rust-toolchain@stable
       with:
         components: rustfmt
     - name: Run cargo fmt
