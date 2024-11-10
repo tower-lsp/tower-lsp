@@ -15,7 +15,7 @@ pub struct Pending(DashMap<Id, Vec<oneshot::Sender<Response>>>);
 impl Pending {
     /// Creates a new pending client requests map.
     pub fn new() -> Self {
-        Pending(DashMap::new())
+        Self(DashMap::new())
     }
 
     /// Inserts the given response into the map.
@@ -64,7 +64,11 @@ impl Pending {
 impl Debug for Pending {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         #[derive(Debug)]
-        struct Waiters(usize);
+        struct Waiters(
+            /// Number of responses to await
+            #[allow(dead_code)]
+            usize,
+        );
 
         let iter = self
             .0

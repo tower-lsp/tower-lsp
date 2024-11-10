@@ -51,7 +51,7 @@ impl Client {
         let (tx, rx) = mpsc::channel(1);
         let pending = Arc::new(Pending::new());
 
-        let client = Client {
+        let client = Self {
             inner: Arc::new(ClientInner {
                 tx,
                 request_id: AtomicU32::new(0),
@@ -210,10 +210,12 @@ impl Client {
         use lsp_types::notification::TelemetryEvent;
         match serde_json::to_value(data) {
             Err(e) => error!("invalid JSON in `telemetry/event` notification: {}", e),
-            Ok(mut value) => {
-                if !value.is_null() && !value.is_array() && !value.is_object() {
-                    value = Value::Array(vec![value]);
-                }
+            Ok(value) => {
+                let value = match value {
+                    Value::Object(value) => OneOf::Left(value),
+                    Value::Array(value) => OneOf::Right(value),
+                    value => OneOf::Right(vec![value]),
+                };
                 self.send_notification_unchecked::<TelemetryEvent>(value)
                     .await;
             }
@@ -347,6 +349,7 @@ impl Client {
     ///
     /// This request was introduced in specification version 3.17.0.
     pub async fn workspace_diagnostic_refresh(&self) -> jsonrpc::Result<()> {
+        use lsp_types::request::WorkspaceDiagnosticRefresh;
         self.send_request::<WorkspaceDiagnosticRefresh>(()).await
     }
 
@@ -361,7 +364,7 @@ impl Client {
     /// This notification will only be sent if the server is initialized.
     pub async fn publish_diagnostics(
         &self,
-        uri: Url,
+        uri: Uri,
         diags: Vec<Diagnostic>,
         version: Option<i32>,
     ) {
@@ -540,7 +543,7 @@ impl Client {
         if let State::Initialized | State::ShutDown = self.inner.state.get() {
             self.send_request_unchecked::<R>(params).await
         } else {
-            let id = self.inner.request_id.load(Ordering::SeqCst) as i64 + 1;
+            let id = i64::from(self.inner.request_id.load(Ordering::SeqCst)) + 1;
             let msg = Request::from_request::<R>(id.into(), params);
             trace!("server not initialized, supressing message: {}", msg);
             Err(jsonrpc::not_initialized_error())
@@ -575,9 +578,10 @@ impl Client {
     ///
     /// This method can be used to build custom [`Request`] objects with numeric IDs that are
     /// guaranteed to be unique every time.
+    #[must_use]
     pub fn next_request_id(&self) -> Id {
         let num = self.inner.request_id.fetch_add(1, Ordering::Relaxed);
-        Id::Number(num as i64)
+        Id::Number(i64::from(num))
     }
 }
 
@@ -672,27 +676,31 @@ mod tests {
     #[tokio::test(flavor = "current_thread")]
     async fn telemetry_event() {
         let null = json!(null);
-        let expected = Request::from_notification::<TelemetryEvent>(null.clone());
+        let value = OneOf::Right(vec![null.clone()]);
+        let expected = Request::from_notification::<TelemetryEvent>(value);
         assert_client_message(|p| async move { p.telemetry_event(null).await }, expected).await;
 
         let array = json!([1, 2, 3]);
-        let expected = Request::from_notification::<TelemetryEvent>(array.clone());
+        let value = OneOf::Right(array.as_array().unwrap().to_owned());
+        let expected = Request::from_notification::<TelemetryEvent>(value);
         assert_client_message(|p| async move { p.telemetry_event(array).await }, expected).await;
 
         let object = json!({});
-        let expected = Request::from_notification::<TelemetryEvent>(object.clone());
+        let value = OneOf::Left(object.as_object().unwrap().to_owned());
+        let expected = Request::from_notification::<TelemetryEvent>(value);
         assert_client_message(|p| async move { p.telemetry_event(object).await }, expected).await;
 
         let other = json!("hello");
         let wrapped = Value::Array(vec![other.clone()]);
-        let expected = Request::from_notification::<TelemetryEvent>(wrapped);
+        let value = OneOf::Right(wrapped.as_array().unwrap().to_owned());
+        let expected = Request::from_notification::<TelemetryEvent>(value);
         assert_client_message(|p| async move { p.telemetry_event(other).await }, expected).await;
     }
 
     #[tokio::test(flavor = "current_thread")]
     async fn publish_diagnostics() {
-        let uri: Url = "file:///path/to/file".parse().unwrap();
-        let diagnostics = vec![Diagnostic::new_simple(Default::default(), "example".into())];
+        let uri: Uri = "file:///path/to/file".parse().unwrap();
+        let diagnostics = vec![Diagnostic::new_simple(Range::default(), "example".into())];
 
         let params = PublishDiagnosticsParams::new(uri.clone(), diagnostics.clone(), None);
         let expected = Request::from_notification::<PublishDiagnostics>(params);
