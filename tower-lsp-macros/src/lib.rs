@@ -148,7 +148,6 @@ fn gen_server_router(trait_name: &syn::Ident, methods: &[MethodCall]) -> proc_ma
             use lsp_types::*;
             use lsp_types::notification::*;
             use lsp_types::request::*;
-            use serde_json::Value;
 
             use super::#trait_name;
             use crate::jsonrpc::{Result, Router};

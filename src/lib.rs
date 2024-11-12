@@ -94,7 +94,6 @@ use lsp_types::request::{
     GotoImplementationResponse, GotoTypeDefinitionParams, GotoTypeDefinitionResponse,
 };
 use lsp_types::*;
-use serde_json::Value;
 use tower_lsp_macros::rpc;
 use tracing::{error, warn};
 
@@ -1323,7 +1322,7 @@ pub trait LanguageServer: Send + Sync + 'static {
     /// In most cases, the server creates a [`WorkspaceEdit`] structure and applies the changes to
     /// the workspace using `Client::apply_edit()` before returning from this function.
     #[rpc(name = "workspace/executeCommand")]
-    async fn execute_command(&self, params: ExecuteCommandParams) -> Result<Option<Value>> {
+    async fn execute_command(&self, params: ExecuteCommandParams) -> Result<Option<LSPAny>> {
         let _ = params;
         error!("Got a workspace/executeCommand request, but it is not implemented");
         Err(Error::method_not_found())

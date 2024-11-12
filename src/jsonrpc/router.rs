@@ -9,8 +9,8 @@ use std::sync::Arc;
 use std::task::{Context, Poll};
 
 use futures::future::{self, BoxFuture, FutureExt};
+use lsp_types::LSPAny;
 use serde::{de::DeserializeOwned, Serialize};
-use serde_json::Value;
 use tower::{util::BoxService, Layer, Service};
 
 use crate::jsonrpc::ErrorCode;
@@ -90,7 +90,7 @@ impl<S, E: Send + 'static> Service<Request> for Router<S, E> {
             let (method, id, _) = req.into_parts();
             future::ok(id.map(|id| {
                 let mut error = Error::method_not_found();
-                error.data = Some(Value::from(method));
+                error.data = Some(LSPAny::from(method));
                 Response::from_error(id, error)
             }))
             .boxed()
@@ -201,12 +201,12 @@ where
 /// A trait implemented by all JSON-RPC method parameters.
 pub trait FromParams: private::Sealed + Send + Sized + 'static {
     /// Attempts to deserialize `Self` from the `params` value extracted from [`Request`].
-    fn from_params(params: Option<Value>) -> super::Result<Self>;
+    fn from_params(params: Option<LSPAny>) -> super::Result<Self>;
 }
 
 /// Deserialize non-existent JSON-RPC parameters.
 impl FromParams for () {
-    fn from_params(params: Option<Value>) -> super::Result<Self> {
+    fn from_params(params: Option<LSPAny>) -> super::Result<Self> {
         if let Some(p) = params {
             Err(Error::invalid_params(format!("Unexpected params: {p}")))
         } else {
@@ -217,7 +217,7 @@ impl FromParams for () {
 
 /// Deserialize required JSON-RPC parameters.
 impl<P: DeserializeOwned + Send + 'static> FromParams for (P,) {
-    fn from_params(params: Option<Value>) -> super::Result<Self> {
+    fn from_params(params: Option<LSPAny>) -> super::Result<Self> {
         if let Some(p) = params {
             serde_json::from_value(p)
                 .map(|params| (params,))
@@ -296,8 +296,8 @@ mod tests {
     struct Mock;
 
     impl Mock {
-        async fn request(&self) -> Result<Value, Error> {
-            Ok(Value::Null)
+        async fn request(&self) -> Result<LSPAny, Error> {
+            Ok(LSPAny::Null)
         }
 
         async fn request_params(&self, params: Params) -> Result<Params, Error> {
@@ -318,7 +318,10 @@ mod tests {
 
         let request = Request::build("first").id(0).finish();
         let response = router.ready().await.unwrap().call(request).await;
-        assert_eq!(response, Ok(Some(Response::from_ok(0.into(), Value::Null))));
+        assert_eq!(
+            response,
+            Ok(Some(Response::from_ok(0.into(), LSPAny::Null)))
+        );
 
         let params = json!({"foo": -123i32, "bar": "hello world"});
         let with_params = Request::build("second")
