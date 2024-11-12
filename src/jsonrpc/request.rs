@@ -2,8 +2,8 @@ use std::borrow::Cow;
 use std::fmt::{self, Display, Formatter};
 use std::str::FromStr;
 
+use lsp_types::LSPAny;
 use serde::{Deserialize, Deserializer, Serialize};
-use serde_json::Value;
 
 use super::{Id, Version};
 
@@ -23,7 +23,7 @@ pub struct Request {
     method: Cow<'static, str>,
     #[serde(default, deserialize_with = "deserialize_some")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    params: Option<Value>,
+    params: Option<LSPAny>,
     #[serde(default, deserialize_with = "deserialize_some")]
     #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<Id>,
@@ -93,12 +93,12 @@ impl Request {
     }
 
     /// Returns the `params` field, if present.
-    pub fn params(&self) -> Option<&Value> {
+    pub fn params(&self) -> Option<&LSPAny> {
         self.params.as_ref()
     }
 
     /// Splits this request into the method name, request ID, and the `params` field, if present.
-    pub fn into_parts(self) -> (Cow<'static, str>, Option<Id>, Option<Value>) {
+    pub fn into_parts(self) -> (Cow<'static, str>, Option<Id>, Option<LSPAny>) {
         (self.method, self.id, self.params)
     }
 }
@@ -147,7 +147,7 @@ impl FromStr for Request {
 #[derive(Debug)]
 pub struct RequestBuilder {
     method: Cow<'static, str>,
-    params: Option<Value>,
+    params: Option<LSPAny>,
     id: Option<Id>,
 }
 
@@ -163,7 +163,7 @@ impl RequestBuilder {
     /// Sets the `params` member of the request to the given value.
     ///
     /// This member is omitted from the request by default.
-    pub fn params<V: Into<Value>>(mut self, params: V) -> Self {
+    pub fn params<V: Into<LSPAny>>(mut self, params: V) -> Self {
         self.params = Some(params.into());
         self
     }

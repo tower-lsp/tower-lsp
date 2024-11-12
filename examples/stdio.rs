@@ -1,4 +1,3 @@
-use serde_json::Value;
 use tower_lsp::jsonrpc::Result;
 use tower_lsp::lsp_types::*;
 use tower_lsp::{Client, LanguageServer, LspService, Server};
@@ -69,7 +68,7 @@ impl LanguageServer for Backend {
             .await;
     }
 
-    async fn execute_command(&self, _: ExecuteCommandParams) -> Result<Option<Value>> {
+    async fn execute_command(&self, _: ExecuteCommandParams) -> Result<Option<LSPAny>> {
         self.client
             .log_message(MessageType::INFO, "command executed!")
             .await;

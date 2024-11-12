@@ -10,7 +10,7 @@ use std::sync::Arc;
 use std::task::{Context, Poll};
 
 use futures::future::{self, BoxFuture, FutureExt};
-use serde_json::Value;
+use lsp_types::LSPAny;
 use tower::Service;
 
 use crate::jsonrpc::{
@@ -126,7 +126,7 @@ impl<S: LanguageServer> Service<Request> for LspService<S> {
             match response.as_ref().and_then(|res| res.error()) {
                 Some(Error {
                     code: ErrorCode::MethodNotFound,
-                    data: Some(Value::String(m)),
+                    data: Some(LSPAny::String(m)),
                     ..
                 }) if m.starts_with("$/") => Ok(None),
                 _ => Ok(response),

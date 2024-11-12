@@ -12,7 +12,6 @@ use futures::future::BoxFuture;
 use futures::sink::SinkExt;
 use lsp_types::*;
 use serde::Serialize;
-use serde_json::Value;
 use tower::Service;
 use tracing::{error, trace};
 
@@ -212,8 +211,8 @@ impl Client {
             Err(e) => error!("invalid JSON in `telemetry/event` notification: {}", e),
             Ok(value) => {
                 let value = match value {
-                    Value::Object(value) => OneOf::Left(value),
-                    Value::Array(value) => OneOf::Right(value),
+                    LSPAny::Object(value) => OneOf::Left(value),
+                    LSPAny::Array(value) => OneOf::Right(value),
                     value => OneOf::Right(vec![value]),
                 };
                 self.send_notification_unchecked::<TelemetryEvent>(value)
@@ -401,7 +400,7 @@ impl Client {
     pub async fn configuration(
         &self,
         items: Vec<ConfigurationItem>,
-    ) -> jsonrpc::Result<Vec<Value>> {
+    ) -> jsonrpc::Result<Vec<LSPAny>> {
         use lsp_types::request::WorkspaceConfiguration;
         self.send_request::<WorkspaceConfiguration>(ConfigurationParams { items })
             .await
@@ -691,7 +690,7 @@ mod tests {
         assert_client_message(|p| async move { p.telemetry_event(object).await }, expected).await;
 
         let other = json!("hello");
-        let wrapped = Value::Array(vec![other.clone()]);
+        let wrapped = LSPAny::Array(vec![other.clone()]);
         let value = OneOf::Right(wrapped.as_array().unwrap().to_owned());
         let expected = Request::from_notification::<TelemetryEvent>(value);
         assert_client_message(|p| async move { p.telemetry_event(other).await }, expected).await;

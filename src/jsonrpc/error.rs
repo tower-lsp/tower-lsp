@@ -3,8 +3,8 @@
 use std::borrow::Cow;
 use std::fmt::{self, Display, Formatter};
 
+use lsp_types::LSPAny;
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 /// A specialized [`Result`] error type for JSON-RPC handlers.
 ///
@@ -109,7 +109,7 @@ pub struct Error {
     pub message: Cow<'static, str>,
     /// Additional information about the error, if any.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub data: Option<Value>,
+    pub data: Option<LSPAny>,
 }
 
 impl Error {

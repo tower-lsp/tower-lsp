@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 use tower_lsp::jsonrpc::{Error, Result};
 use tower_lsp::lsp_types::notification::Notification;
 use tower_lsp::lsp_types::*;
@@ -53,7 +52,7 @@ impl LanguageServer for Backend {
         Ok(())
     }
 
-    async fn execute_command(&self, params: ExecuteCommandParams) -> Result<Option<Value>> {
+    async fn execute_command(&self, params: ExecuteCommandParams) -> Result<Option<LSPAny>> {
         if params.command == "custom.notification" {
             self.client
                 .send_notification::<CustomNotification>(CustomNotificationParams::new(
