@@ -77,7 +77,8 @@
 #![deny(missing_docs)]
 #![forbid(unsafe_code)]
 
-pub extern crate lsp_types;
+/// A re-export of [`lsp-types`](https://docs.rs/lsp-types) for convenience.
+pub use lsp_types;
 
 /// A re-export of [`async-trait`](https://docs.rs/async-trait) for convenience.
 pub use async_trait::async_trait;
