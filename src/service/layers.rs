@@ -19,7 +19,7 @@ use super::state::{ServerState, State};
 ///
 /// # Specification
 ///
-/// https://microsoft.github.io/language-server-protocol/specification#initialize
+/// <https://microsoft.github.io/language-server-protocol/specification#initialize>
 pub struct Initialize {
     state: Arc<ServerState>,
     pending: Arc<Pending>,
@@ -88,7 +88,7 @@ where
 ///
 /// # Specification
 ///
-/// https://microsoft.github.io/language-server-protocol/specification#shutdown
+/// <https://microsoft.github.io/language-server-protocol/specification#shutdown>
 pub struct Shutdown {
     state: Arc<ServerState>,
     pending: Arc<Pending>,
@@ -149,7 +149,7 @@ where
 ///
 /// # Specification
 ///
-/// https://microsoft.github.io/language-server-protocol/specification#exit
+/// <https://microsoft.github.io/language-server-protocol/specification#exit>
 pub struct Exit {
     state: Arc<ServerState>,
     pending: Arc<Pending>,
@@ -266,7 +266,7 @@ where
 ///
 /// # Specification
 ///
-/// https://microsoft.github.io/language-server-protocol/specification#cancelRequest
+/// <https://microsoft.github.io/language-server-protocol/specification#cancelRequest>
 struct Cancellable<S> {
     inner: S,
     pending: Arc<Pending>,
