@@ -35,7 +35,7 @@ Symbol          | Description
 
 </details>
 
-### Overall status: (80.5/90) _~89.4%_
+### Overall status: (84.5/90) _~93%_
 
 ## [3.17.0] - 2022-05-10
 
@@ -43,10 +43,10 @@ Symbol          | Description
 
 Method Name                           | Message Type                | Supported      | Tracking Issue(s)
 --------------------------------------|:---------------------------:|:--------------:|------------------
-[`notebookDocument/didOpen`]          | :arrow_right:               | :red_circle:   |
-[`notebookDocument/didChange`]        | :arrow_right:               | :red_circle:   |
-[`notebookDocument/didSave`]          | :arrow_right:               | :red_circle:   |
-[`notebookDocument/didClose`]         | :arrow_right:               | :red_circle:   |
+[`notebookDocument/didOpen`]          | :arrow_right:               | :green_circle: |
+[`notebookDocument/didChange`]        | :arrow_right:               | :green_circle: |
+[`notebookDocument/didSave`]          | :arrow_right:               | :green_circle: |
+[`notebookDocument/didClose`]         | :arrow_right:               | :green_circle: |
 [`textDocument/prepareTypeHierarchy`] | :leftwards_arrow_with_hook: | :green_circle: |
 [`typeHierarchy/supertypes`]          | :leftwards_arrow_with_hook: | :green_circle: |
 [`typeHierarchy/subtypes`]            | :leftwards_arrow_with_hook: | :green_circle: |
