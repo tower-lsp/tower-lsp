@@ -119,13 +119,11 @@ where
             .buffer_unordered(self.max_concurrency)
             .filter_map(future::ready)
             .map(|res| Ok(Message::Response(res)))
-            .forward(responses_tx.clone().sink_map_err(|_| unreachable!()))
-            .map(|_| ());
+            .forward(responses_tx.clone());
 
         let print_output = stream_select!(responses_rx, client_requests.map(Message::Request))
             .map(Ok)
-            .forward(framed_stdout.sink_map_err(|e| error!("failed to encode message: {}", e)))
-            .map(|_| ());
+            .forward(framed_stdout);
 
         let read_input = async {
             while let Some(msg) = framed_stdin.next().await {
@@ -162,7 +160,11 @@ where
             client_abort.abort();
         };
 
-        join!(print_output, read_input, process_server_tasks);
+        join!(
+            process_server_tasks.map(|_| ()),
+            print_output.map(|_| ()),
+            read_input
+        );
     }
 }
 
