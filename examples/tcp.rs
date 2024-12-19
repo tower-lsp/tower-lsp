@@ -37,6 +37,8 @@ impl LanguageServer for Backend {
                 }),
                 ..ServerCapabilities::default()
             },
+            #[cfg(feature = "proposed")]
+            offset_encoding: None,
         })
     }
 
