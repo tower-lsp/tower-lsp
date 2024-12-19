@@ -36,7 +36,7 @@ consists of three parts:
 - A `Server` which spawns the `LspService` and processes requests and responses
   over `stdio` or TCP.
 
-## Example
+# Example
 
 ```rust
 use tower_lsp::jsonrpc::Result;
@@ -75,7 +75,7 @@ async fn main() {
 }
 ```
 
-## Using runtimes other than tokio
+# Using runtimes other than tokio
 
 By default, `tower-lsp` is configured for use with `tokio`.
 
@@ -89,7 +89,7 @@ default-features = false
 features = ["runtime-agnostic"]
 ```
 
-## Using proposed features
+# Using proposed features
 
 You can use enable proposed features in the
 [LSP Specification version 3.18](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/)
@@ -97,11 +97,18 @@ by enabling the `proposed` Cargo crate feature. Note that there are no semver
 guarantees to the `proposed` features so there may be breaking changes between
 any type of version in the `proposed` features.
 
-## Ecosystem
+# Projects using `tower-lsp`
+
+- [Harper](https://github.com/Automattic/harper)
+- [Deno](https://github.com/denoland/deno/tree/main/cli/lsp)
+- [Polarity](https://github.com/polarity-lang/polarity/): both for their language server and their [interactive web demo](https://polarity-lang.github.io).
+- [Turborepo](https://github.com/vercel/turborepo/tree/main/crates/turborepo-lsp)
+
+# Ecosystem
 
 - [tower-lsp-boilerplate](https://github.com/IWANABETHATGUY/tower-lsp-boilerplate) - Useful GitHub project template which makes writing new language servers easier.
 
-## License
+# License
 
 `tower-lsp` is free and open source software distributed under the terms of
 either the [MIT](LICENSE-MIT) or the [Apache 2.0](LICENSE-APACHE) license, at
