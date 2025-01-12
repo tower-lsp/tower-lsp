@@ -1,13 +1,13 @@
 [package]
-name = "tower-lsp-macros"
+name = "tower-lsp-server-macros"
 version = "0.9.0"
 authors = ["Eyal Kalderon <ebkalderon@gmail.com>"]
-description = "Internal procedural macros for tower-lsp"
+description = "Internal procedural macros for tower-lsp-server"
 edition = "2021"
 rust-version = "1.56.0"
 license = "MIT OR Apache-2.0"
-homepage = "https://github.com/ebkalderon/tower-lsp"
-repository = "https://github.com/ebkalderon/tower-lsp"
+homepage = "https://github.com/tower-lsp-community/tower-lsp-server"
+repository = "https://github.com/tower-lsp-community/tower-lsp-server"
 
 [lib]
 proc-macro = true

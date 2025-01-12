@@ -1,4 +1,4 @@
-//! Internal procedural macros for [`tower-lsp`](https://docs.rs/tower-lsp).
+//! Internal procedural macros for [`tower-lsp-server`](https://docs.rs/tower-lsp-server).
 //!
 //! This crate should not be used directly.
 

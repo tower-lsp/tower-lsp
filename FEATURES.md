@@ -1,18 +1,13 @@
 # Supported Features
 
-This document tracks which features defined in the [Language Server Protocol
-(LSP) specification][spec] are currently supported by `tower-lsp` and to what
-degree. Please note that this document is provided _as-is_ and will be updated
-over time on a best-effort basis. There is no guarantee that it will always
-reflect the current reality exactly on the mainline branch. However, it should
-be updated on every `tower-lsp` release at minimum.
+This document tracks which features defined in the [Language Server Protocol (LSP) specification][spec] are currently supported by `tower-lsp-server` and to what degree. Please note that this document is provided _as-is_ and will be updated over time on a best-effort basis. There is no guarantee that it will always reflect the current reality exactly on the mainline branch. However, it should be updated on every `tower-lsp-server` release at minimum.
 
 [spec]: https://microsoft.github.io/language-server-protocol/specification
 
 Feel free to open a new [discussion thread] if there are any questions. Drive-by
 pull requests correcting this document are always welcome!
 
-[discussion thread]: https://github.com/ebkalderon/tower-lsp/discussions
+[discussion thread]: https://github.com/tower-lsp-community/tower-lsp-server/discussions
 
 <details><summary>Click here to expand/collapse the icon legend.</summary>
 

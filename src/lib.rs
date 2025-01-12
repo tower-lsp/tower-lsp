@@ -95,7 +95,7 @@ use lsp_types::request::{
     GotoImplementationResponse, GotoTypeDefinitionParams, GotoTypeDefinitionResponse,
 };
 use lsp_types::*;
-use tower_lsp_macros::rpc;
+use tower_lsp_server_macros::rpc;
 use tracing::{error, warn};
 
 use self::jsonrpc::{Error, Result};
@@ -1371,7 +1371,7 @@ pub trait LanguageServer: Send + Sync + 'static {
         Err(Error::method_not_found())
     }
 
-    // TODO: Add `work_done_progress_cancel()` here (since 3.15.0) when supported by `tower-lsp`.
+    // TODO: Add `work_done_progress_cancel()` here (since 3.15.0) when supported by `tower-lsp-server`
     // https://github.com/ebkalderon/tower-lsp/issues/176
 }
 
