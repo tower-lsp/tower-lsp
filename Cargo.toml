@@ -1,13 +1,13 @@
 [package]
-name = "tower-lsp"
-version = "0.20.0"
+name = "tower-lsp-server"
+version = "0.21.0"
 authors = ["Eyal Kalderon <ebkalderon@gmail.com>"]
 edition = "2021"
 description = "Language Server Protocol implementation based on Tower"
 license = "MIT OR Apache-2.0"
-homepage = "https://github.com/ebkalderon/tower-lsp"
-repository = "https://github.com/ebkalderon/tower-lsp"
-documentation = "https://docs.rs/tower-lsp/"
+homepage = "https://github.com/tower-lsp-community/tower-lsp-server"
+repository = "https://github.com/tower-lsp-community/tower-lsp-server"
+documentation = "https://docs.rs/tower-lsp-server/"
 readme = "README.md"
 categories = ["asynchronous"]
 keywords = ["language-server", "lsp", "tower"]
@@ -21,7 +21,7 @@ runtime-tokio = ["tokio", "tokio-util"]
 proposed = ["lsp-types/proposed"]
 
 [dependencies]
-tower-lsp-macros = { version = "0.9", path = "./tower-lsp-macros" }
+tower-lsp-server-macros = { version = "0.9", path = "./tower-lsp-server-macros" }
 
 async-codec-lite = { version = "0.0", optional = true }
 async-trait = "0.1"
@@ -47,5 +47,5 @@ tracing-subscriber = "0.3"
 ws_stream_tungstenite = { version = "0.14", features = ["tokio_io"] }
 
 [workspace]
-members = [".", "./tower-lsp-macros"]
+members = [".", "./tower-lsp-server-macros"]
 default-members = ["."]
