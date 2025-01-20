@@ -10,7 +10,7 @@ use syn::{parse_macro_input, FnArg, ItemTrait, LitStr, ReturnType, TraitItem};
 
 /// Macro for generating LSP server implementation from [`lsp-types`](https://docs.rs/lsp-types).
 ///
-/// This procedural macro annotates the `tower_lsp::LanguageServer` trait and generates a
+/// This procedural macro annotates the `tower_lsp_server::LanguageServer` trait and generates a
 /// corresponding `register_lsp_methods()` function which registers all the methods on that trait
 /// as RPC handlers.
 #[proc_macro_attribute]
