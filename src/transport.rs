@@ -134,12 +134,21 @@ where
                             return;
                         }
 
+                        // per specifications, the server must exit immediately after the exit notification
+                        // some clients will not close stdin and thus keep framed_stdin waiting forever
+                        // we break early here so that control can be yielded back immediately
+                        let will_exit = req.method() == "exit";
+
                         let fut = service.call(req).unwrap_or_else(|err| {
                             error!("{}", display_sources(err.into().as_ref()));
                             None
                         });
 
                         server_tasks_tx.send(fut).await.unwrap();
+
+                        if will_exit {
+                            break;
+                        }
                     }
                     Ok(Message::Response(res)) => {
                         if let Err(err) = client_responses.send(res).await {
@@ -250,6 +259,45 @@ mod tests {
         (Cursor::new(mock_request()), Vec::new())
     }
 
+    // Simulates a still-live stdin that the client didn't drop.
+    struct DetachedCursor(Vec<u8>);
+
+    #[cfg(feature = "runtime-tokio")]
+    impl AsyncRead for DetachedCursor {
+        fn poll_read(
+            mut self: std::pin::Pin<&mut Self>,
+            _: &mut Context<'_>,
+            buf: &mut tokio::io::ReadBuf<'_>,
+        ) -> Poll<std::io::Result<()>> {
+            if self.0.is_empty() {
+                return Poll::Pending;
+            }
+
+            buf.put_slice(&self.0);
+            self.0.clear();
+            Poll::Ready(Ok(()))
+        }
+    }
+
+    #[cfg(feature = "runtime-agnostic")]
+    impl AsyncRead for DetachedCursor {
+        fn poll_read(
+            mut self: std::pin::Pin<&mut Self>,
+            _: &mut Context<'_>,
+            buf: &mut [u8],
+        ) -> Poll<std::io::Result<usize>> {
+            if self.0.is_empty() {
+                return Poll::Pending;
+            }
+
+            let len = std::cmp::min(buf.len(), self.0.len());
+            let after = self.0.split_off(len);
+            buf[..len].copy_from_slice(&self.0);
+            self.0 = after;
+            Poll::Ready(Ok(len))
+        }
+    }
+
     #[tokio::test(flavor = "current_thread")]
     async fn serves_on_stdio() {
         let (mut stdin, mut stdout) = mock_stdio();
@@ -289,5 +337,22 @@ mod tests {
         let err = r#"{"jsonrpc":"2.0","error":{"code":-32700,"message":"Parse error"},"id":null}"#;
         let output = format!("Content-Length: {}\r\n\r\n{}", err.len(), err).into_bytes();
         assert_eq!(stdout, output);
+    }
+
+    #[tokio::test(flavor = "current_thread")]
+    async fn stops_promptly_after_exit_notification() {
+        let req = r#"{"jsonrpc":"2.0","method":"exit"}"#;
+        let message = format!("Content-Length: {}\r\n\r\n{}", req.len(), req).into_bytes();
+        let (mut stdin, mut stdout) = (DetachedCursor(message), Vec::new());
+
+        assert!(
+            tokio::time::timeout(
+                std::time::Duration::from_secs(1),
+                Server::new(&mut stdin, &mut stdout, MockLoopback(vec![])).serve(MockService)
+            )
+            .await
+            .is_ok(),
+            "waited for more than 1 second for exit"
+        );
     }
 }
