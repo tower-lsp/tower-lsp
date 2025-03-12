@@ -12,7 +12,7 @@ readme = "README.md"
 categories = ["asynchronous"]
 keywords = ["language-server", "lsp", "tower"]
 exclude = ["FEATURES.md"]
-rust-version = "1.70"
+rust-version = "1.77"
 
 [features]
 default = ["runtime-tokio"]
@@ -21,11 +21,7 @@ runtime-tokio = ["tokio", "tokio-util"]
 proposed = ["lsp-types/proposed"]
 
 [dependencies]
-tower-lsp-server-macros = { version = "0.9", path = "./tower-lsp-server-macros" }
-
 async-codec-lite = { version = "0.0", optional = true }
-async-trait = "0.1"
-auto_impl = "1"
 bytes = "1"
 dashmap = "6"
 futures = { version = "0.3", default-features = false, features = ["std", "async-await"] }
@@ -45,7 +41,3 @@ tokio-util = { version = "0.7", features = ["compat"] }
 tokio = { version = "1", features = ["io-util", "io-std", "macros", "rt-multi-thread", "time"] }
 tracing-subscriber = "0.3"
 ws_stream_tungstenite = { version = "0.14", features = ["tokio_io"] }
-
-[workspace]
-members = [".", "./tower-lsp-server-macros"]
-default-members = ["."]
