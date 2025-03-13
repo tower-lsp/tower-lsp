@@ -4,6 +4,8 @@
 [![Crates.io][crates-badge]][crates-url]
 [![Documentation][docs-badge]][docs-url]
 
+*A community fork of [tower-lsp](https://github.com/ebkalderon/tower-lsp)*
+
 [ci-badge]: https://github.com/tower-lsp-community/tower-lsp-server/actions/workflows/rust.yml/badge.svg?branch=main
 [ci-badge-url]: https://github.com/tower-lsp-community/tower-lsp-server/actions
 [crates-badge]: https://img.shields.io/crates/v/tower-lsp-server.svg
@@ -69,11 +71,11 @@ async fn main() {
 }
 ```
 
+See more [examples](https://github.com/tower-lsp-community/tower-lsp-server/tree/main/examples).
+
 # Using runtimes other than tokio
 
-By default, `tower-lsp-server` is configured for use with `tokio`.
-
-Using `tower-lsp-server` with other runtimes requires disabling `default-features` and enabling the `runtime-agnostic` feature:
+By default, `tower-lsp-server` is configured for use with `tokio`. Using `tower-lsp-server` with other runtimes requires disabling `default-features` and enabling the `runtime-agnostic` feature:
 
 ```toml
 [dependencies.tower-lsp-server]
@@ -89,13 +91,13 @@ You can use enable proposed features in the [LSP Specification version 3.18](htt
 # Projects using `tower-lsp-server`
 
 - [Harper](https://github.com/Automattic/harper)
-- [Deno](https://github.com/denoland/deno/tree/main/cli/lsp)
 - [Polarity](https://github.com/polarity-lang/polarity/): both for their language server and their [interactive web demo](https://polarity-lang.github.io).
-- [Turborepo](https://github.com/vercel/turborepo/tree/main/crates/turborepo-lsp)
+- [Deno](https://github.com/denoland/deno/tree/main/cli/lsp) (still uses the original project)
+- [Turborepo](https://github.com/vercel/turborepo/tree/main/crates/turborepo-lsp) (still uses the original project)
 
 # Ecosystem
 
-- [tower-lsp-boilerplate](https://github.com/IWANABETHATGUY/tower-lsp-boilerplate) - Useful GitHub project template which makes writing new language servers easier.
+- [tower-lsp-boilerplate](https://github.com/IWANABETHATGUY/tower-lsp-boilerplate) - Useful GitHub project template which makes writing new language servers easier. This is made for the original project but should be straight forward to adapt. Issue [#23](https://github.com/tower-lsp-community/tower-lsp-server/issues/23) proposes to host a similar project within the organization
 
 # License
 
