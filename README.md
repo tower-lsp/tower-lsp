@@ -1,17 +1,28 @@
 # tower-lsp-server
 
-[![CI][ci-badge]][ci-badge-url]
+[![CI][ci-badge]][ci-url]
 [![Crates.io][crates-badge]][crates-url]
 [![Documentation][docs-badge]][docs-url]
 
-*A community fork of [tower-lsp](https://github.com/ebkalderon/tower-lsp)*
-
 [ci-badge]: https://github.com/tower-lsp-community/tower-lsp-server/actions/workflows/rust.yml/badge.svg?branch=main
-[ci-badge-url]: https://github.com/tower-lsp-community/tower-lsp-server/actions
+[ci-url]: https://github.com/tower-lsp-community/tower-lsp-server/actions
 [crates-badge]: https://img.shields.io/crates/v/tower-lsp-server.svg
 [crates-url]: https://crates.io/crates/tower-lsp-server
 [docs-badge]: https://docs.rs/tower-lsp-server/badge.svg
 [docs-url]: https://docs.rs/tower-lsp-server
+
+*A community fork of [tower-lsp](https://github.com/ebkalderon/tower-lsp)*
+
+- [Usage](#usage)
+- [Projects using `tower-lsp-server`](#projects-using-tower-lsp-server)
+- [Ecosystem](#ecosystem)
+- [License](#license)
+
+See also [Changelog], [Contributing] and [Code of conduct].
+
+[Changelog]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CHANGELOG.md
+[Contributing]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CONTRIBUTING.md
+[Code of conduct]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CODE_OF_CONDUCT.md
 
 [Language Server Protocol] implementation for Rust based on [Tower].
 
@@ -32,7 +43,9 @@ Tower is a simple and composable framework for implementing asynchronous service
 - A `Server` which spawns the `LspService` and processes requests and responses
   over `stdio` or TCP.
 
-# Example
+# Usage
+
+## Minimal example
 
 ```rust
 use tower_lsp_server::jsonrpc::Result;
@@ -71,9 +84,9 @@ async fn main() {
 }
 ```
 
-See more [examples](https://github.com/tower-lsp-community/tower-lsp-server/tree/main/examples).
+See more advanced [examples](https://github.com/tower-lsp-community/tower-lsp-server/tree/main/examples).
 
-# Using runtimes other than tokio
+## Using runtimes other than tokio
 
 By default, `tower-lsp-server` is configured for use with `tokio`. Using `tower-lsp-server` with other runtimes requires disabling `default-features` and enabling the `runtime-agnostic` feature:
 
@@ -84,7 +97,7 @@ default-features = false
 features = ["runtime-agnostic"]
 ```
 
-# Using proposed features
+## Using proposed features
 
 You can use enable proposed features in the [LSP Specification version 3.18](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/) by enabling the `proposed` Cargo crate feature. Note that there are no semver guarantees to the `proposed` features so there may be breaking changes between any type of version in the `proposed` features.
 

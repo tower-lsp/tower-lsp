@@ -7,7 +7,35 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.21.0] - 2025-04-01
+
+### Added
+
+* Add notebook support (#15).
+  * Implement `notebookDocument/didChange` server request.
+  * Implement `notebookDocument/didSave` server request.
+  * Implement `notebookDocument/didClose` server request.
+
+### Changed
+
+* Update `lsp-types` from `0.94.1` to `0.97` (#6).
+* Bump minimum supported Rust version from `1.64.0` to `1.77.0`.
+* The `LanguageServer` trait now uses `impl Trait` in Trait feature (#21).
+  * `LanguageServer` is not longer dyn-compatible/object-safe
+  * You should be able to migrate from the old trait signature by just dropping the #[async_trait] macro at the top of the implementation.
+* Correctly use `lsp_types::LSPAny` in public API instead of `serde_json::Value` (#10).
+
+### Fixed
+
+* Use `stream_select` to avoid hanging behaviour (#9)
+
+### Removed
+
+* `async_trait` is no longer exported as it is no longer needed for the `LanguageServer` trait.
+
 ## [0.20.0] - 2023-08-10
+
+> Versions 0.20 and below correspond to the original tower-lsp project.
 
 ### Added
 
