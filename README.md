@@ -18,10 +18,10 @@
 - [Ecosystem](#ecosystem)
 - [License](#license)
 
-See also [Changelog], [Contributing] and [Code of conduct].
+See also [`CHANGELOG.md`] (contains migration information), [`CONTRIBUTING.md`] and the [Code of conduct].
 
-[Changelog]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CHANGELOG.md
-[Contributing]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CONTRIBUTING.md
+[`CHANGELOG.md`]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CHANGELOG.md
+[`CONTRIBUTING.md`]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CONTRIBUTING.md
 [Code of conduct]: https://github.com/tower-lsp-community/tower-lsp-server/blob/main/CODE_OF_CONDUCT.md
 
 [Language Server Protocol] implementation for Rust based on [Tower].
@@ -42,6 +42,8 @@ Tower is a simple and composable framework for implementing asynchronous service
   implementation and defines the behavior of the protocol.
 - A `Server` which spawns the `LspService` and processes requests and responses
   over `stdio` or TCP.
+
+You can check LSP specification coverage in [`FEATURE.md`](https://github.com/tower-lsp-community/tower-lsp-server/blob/main/FEATURES.md).
 
 # Usage
 

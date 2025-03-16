@@ -7,11 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.21.0] - 2025-04-01
+## [0.21.0] - 2025-03-16
 
 ### Added
 
 * Add notebook support (#15).
+  * Implement `notebookDocument/didOpen` server request.
   * Implement `notebookDocument/didChange` server request.
   * Implement `notebookDocument/didSave` server request.
   * Implement `notebookDocument/didClose` server request.
@@ -22,12 +23,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Bump minimum supported Rust version from `1.64.0` to `1.77.0`.
 * The `LanguageServer` trait now uses `impl Trait` in Trait feature (#21).
   * `LanguageServer` is not longer dyn-compatible/object-safe
-  * You should be able to migrate from the old trait signature by just dropping the #[async_trait] macro at the top of the implementation.
+  * You should be able to migrate from the old trait signature by just dropping the `#[async_trait]` macro at the top of the implementation.
 * Correctly use `lsp_types::LSPAny` in public API instead of `serde_json::Value` (#10).
 
 ### Fixed
 
 * Use `stream_select` to avoid hanging behaviour (#9)
+* Close transport 1s after exit notification instead of waiting for transport channel to close (#29)
 
 ### Removed
 

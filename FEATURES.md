@@ -9,6 +9,8 @@ pull requests correcting this document are always welcome!
 
 [discussion thread]: https://github.com/tower-lsp-community/tower-lsp-server/discussions
 
+Issue numbers that starts with an `o` (e.g. `o#123`) refer to issues on the original project repository.
+
 <details><summary>Click here to expand/collapse the icon legend.</summary>
 
 #### Message Type
@@ -38,21 +40,21 @@ Symbol          | Description
 
 Method Name                           | Message Type                | Supported      | Tracking Issue(s)
 --------------------------------------|:---------------------------:|:--------------:|------------------
-[`notebookDocument/didOpen`]          | :arrow_right:               | :green_circle: |
-[`notebookDocument/didChange`]        | :arrow_right:               | :green_circle: |
-[`notebookDocument/didSave`]          | :arrow_right:               | :green_circle: |
-[`notebookDocument/didClose`]         | :arrow_right:               | :green_circle: |
+[`notebookDocument/didOpen`]          | :arrow_right:               | :green_circle: | ~[#15]~
+[`notebookDocument/didChange`]        | :arrow_right:               | :green_circle: | ~[#15]~
+[`notebookDocument/didSave`]          | :arrow_right:               | :green_circle: | ~[#15]~
+[`notebookDocument/didClose`]         | :arrow_right:               | :green_circle: | ~[#15]~
 [`textDocument/prepareTypeHierarchy`] | :leftwards_arrow_with_hook: | :green_circle: |
 [`typeHierarchy/supertypes`]          | :leftwards_arrow_with_hook: | :green_circle: |
 [`typeHierarchy/subtypes`]            | :leftwards_arrow_with_hook: | :green_circle: |
-[`textDocument/inlayHint`]            | :leftwards_arrow_with_hook: | :green_circle: | ~[#352]~
-[`inlayHint/resolve`]                 | :leftwards_arrow_with_hook: | :green_circle: | ~[#352]~
-[`workspace/inlayHint/refresh`]       | :arrow_right_hook:          | :green_circle: | ~[#352]~
-[`textDocument/inlineValue`]          | :leftwards_arrow_with_hook: | :green_circle: | ~[#352]~
-[`workspace/inlineValue/refresh`]     | :arrow_right_hook:          | :green_circle: | ~[#352]~
-[`textDocument/diagnostic`]           | :leftwards_arrow_with_hook: | :green_circle: | ~[#374]~
-[`workspace/diagnostic`]              | :leftwards_arrow_with_hook: | :green_circle: | ~[#374]~
-[`workspace/diagnostic/refresh`]      | :arrow_right_hook:          | :green_circle: | ~[#374]~
+[`textDocument/inlayHint`]            | :leftwards_arrow_with_hook: | :green_circle: | ~[o#352]~
+[`inlayHint/resolve`]                 | :leftwards_arrow_with_hook: | :green_circle: | ~[o#352]~
+[`workspace/inlayHint/refresh`]       | :arrow_right_hook:          | :green_circle: | ~[o#352]~
+[`textDocument/inlineValue`]          | :leftwards_arrow_with_hook: | :green_circle: | ~[o#352]~
+[`workspace/inlineValue/refresh`]     | :arrow_right_hook:          | :green_circle: | ~[o#352]~
+[`textDocument/diagnostic`]           | :leftwards_arrow_with_hook: | :green_circle: | ~[o#374]~
+[`workspace/diagnostic`]              | :leftwards_arrow_with_hook: | :green_circle: | ~[o#374]~
+[`workspace/diagnostic/refresh`]      | :arrow_right_hook:          | :green_circle: | ~[o#374]~
 [`workspaceSymbol/resolve`]           | :leftwards_arrow_with_hook: | :green_circle: |
 
 [`notebookDocument/didOpen`]: https://microsoft.github.io/language-server-protocol/specification#notebookDocument_didOpen
@@ -72,8 +74,9 @@ Method Name                           | Message Type                | Supported 
 [`workspace/diagnostic/refresh`]: https://microsoft.github.io/language-server-protocol/specification#diagnostic_refresh
 [`workspaceSymbol/resolve`]: https://microsoft.github.io/language-server-protocol/specification#workspace_symbolResolve
 
-[#352]: https://github.com/ebkalderon/tower-lsp/issues/352
-[#374]: https://github.com/ebkalderon/tower-lsp/issues/374
+[#15]: https://github.com/tower-lsp-community/tower-lsp-server/issues/15
+[o#352]: https://github.com/ebkalderon/tower-lsp/issues/352
+[o#374]: https://github.com/ebkalderon/tower-lsp/issues/374
 
 ## [3.16.0] - 2020-12-14
 
@@ -87,10 +90,10 @@ Method Name                                | Message Type                | Suppo
 [`callHierarchy/incomingCalls`]            | :leftwards_arrow_with_hook: | :green_circle: |
 [`callHierarchy/outgoingCalls`]            | :leftwards_arrow_with_hook: | :green_circle: |
 [`workspace/codeLens/refresh`]             | :arrow_right_hook:          | :green_circle: |
-[`textDocument/semanticTokens/full`]       | :leftwards_arrow_with_hook: | :green_circle: | ~[#146]~
-[`textDocument/semanticTokens/full/delta`] | :leftwards_arrow_with_hook: | :green_circle: | ~[#146]~
-[`textDocument/semanticTokens/range`]      | :leftwards_arrow_with_hook: | :green_circle: | ~[#146]~
-[`workspace/semanticTokens/refresh`]       | :arrow_right_hook:          | :green_circle: | ~[#146]~
+[`textDocument/semanticTokens/full`]       | :leftwards_arrow_with_hook: | :green_circle: | ~[o#146]~
+[`textDocument/semanticTokens/full/delta`] | :leftwards_arrow_with_hook: | :green_circle: | ~[o#146]~
+[`textDocument/semanticTokens/range`]      | :leftwards_arrow_with_hook: | :green_circle: | ~[o#146]~
+[`workspace/semanticTokens/refresh`]       | :arrow_right_hook:          | :green_circle: | ~[o#146]~
 [`textDocument/moniker`]                   | :leftwards_arrow_with_hook: | :green_circle: |
 [`codeAction/resolve`]                     | :arrow_right_hook:          | :green_circle: |
 [`textDocument/linkedEditingRange`]        | :leftwards_arrow_with_hook: | :green_circle: |
@@ -123,7 +126,7 @@ Method Name                                | Message Type                | Suppo
 [`workspace/didDeleteFiles`]: https://microsoft.github.io/language-server-protocol/specification#workspace_didDeleteFiles
 [`window/showDocument`]: https://microsoft.github.io/language-server-protocol/specification#window_showDocument
 
-[#146]: https://github.com/ebkalderon/tower-lsp/issues/146
+[o#146]: https://github.com/ebkalderon/tower-lsp/issues/146
 
 ## [3.15.0] - 2020-01-14
 
@@ -131,20 +134,20 @@ Method Name                                | Message Type                | Suppo
 
 Method Name                        | Message Type                | Supported      | Tracking Issue(s)
 -----------------------------------|:---------------------------:|:--------------:|------------------
-[`$/progress`]                     | :arrow_right: :arrow_left:  | :red_circle:   | ~[#176]~, [#380], [#381]
-[`window/workDoneProgress/create`] | :arrow_right_hook:          | :red_circle:   | [#381]
-[`window/workDoneProgress/cancel`] | :arrow_right:               | :red_circle:   | [#381]
-[`textDocument/selectionRange`]    | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
+[`$/progress`]                     | :arrow_right: :arrow_left:  | :red_circle:   | ~[o#176]~, ~[o#380]~, [o#381]
+[`window/workDoneProgress/create`] | :arrow_right_hook:          | :red_circle:   | [o#381]
+[`window/workDoneProgress/cancel`] | :arrow_right:               | :red_circle:   | [o#381]
+[`textDocument/selectionRange`]    | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
 
 [`$/progress`]: https://microsoft.github.io/language-server-protocol/specification#progress
 [`window/workDoneProgress/create`]: https://microsoft.github.io/language-server-protocol/specification#window_workDoneProgress_create
 [`window/workDoneProgress/cancel`]: https://microsoft.github.io/language-server-protocol/specification#window_workDoneProgress_cancel
 [`textDocument/selectionRange`]: https://microsoft.github.io/language-server-protocol/specification#textDocument_selectionRange
 
-[#10]: https://github.com/ebkalderon/tower-lsp/issues/10
-[#176]: https://github.com/ebkalderon/tower-lsp/issues/176
-[#380]: https://github.com/ebkalderon/tower-lsp/issues/380
-[#381]: https://github.com/ebkalderon/tower-lsp/issues/381
+[o#10]: https://github.com/ebkalderon/tower-lsp/issues/10
+[o#176]: https://github.com/ebkalderon/tower-lsp/issues/176
+[o#380]: https://github.com/ebkalderon/tower-lsp/issues/380
+[o#381]: https://github.com/ebkalderon/tower-lsp/issues/381
 
 ## [3.14.0] - 2018-12-13
 
@@ -152,11 +155,11 @@ Method Name                        | Message Type                | Supported    
 
 Method Name                  | Message Type                | Supported      | Tracking Issue(s)
 -----------------------------|:---------------------------:|:--------------:|------------------
-[`textDocument/declaration`] | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
+[`textDocument/declaration`] | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
 
 [`textDocument/declaration`]: https://microsoft.github.io/language-server-protocol/specification#textDocument_declaration
 
-[#10]: https://github.com/ebkalderon/tower-lsp/issues/10
+[o#10]: https://github.com/ebkalderon/tower-lsp/issues/10
 
 ## [3.12.0] - 2018-08-23
 
@@ -164,11 +167,11 @@ Method Name                  | Message Type                | Supported      | Tr
 
 Method Name                    | Message Type                | Supported      | Tracking Issue(s)
 -------------------------------|:---------------------------:|:--------------:|------------------
-[`textDocument/prepareRename`] | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
+[`textDocument/prepareRename`] | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
 
 [`textDocument/prepareRename`]: https://microsoft.github.io/language-server-protocol/specification#textDocument_prepareRename
 
-[#10]: https://github.com/ebkalderon/tower-lsp/issues/10
+[o#10]: https://github.com/ebkalderon/tower-lsp/issues/10
 
 ## [3.10.0] - 2018-07-23
 
@@ -176,11 +179,11 @@ Method Name                    | Message Type                | Supported      | 
 
 Method Name                   | Message Type                | Supported      | Tracking Issue(s)
 ------------------------------|:---------------------------:|:--------------:|------------------
-[`textDocument/foldingRange`] | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
+[`textDocument/foldingRange`] | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
 
 [`textDocument/foldingRange`]: https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange
 
-[#10]: https://github.com/ebkalderon/tower-lsp/issues/10
+[o#10]: https://github.com/ebkalderon/tower-lsp/issues/10
 
 ## [3.6.0] - 2018-02-22
 
@@ -188,13 +191,13 @@ Method Name                   | Message Type                | Supported      | T
 
 Method Name                             | Message Type                | Supported      | Tracking Issue(s)
 ----------------------------------------|:---------------------------:|:--------------:|------------------
-[`workspace/workspaceFolders`]          | :arrow_right_hook:          | :green_circle: | ~[#13]~
-[`workspace/didChangeWorkspaceFolders`] | :arrow_right:               | :green_circle: | ~[#8]~
-[`workspace/configuration`]             | :arrow_right_hook:          | :green_circle: | ~[#13]~
-[`textDocument/typeDefinition`]         | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
-[`textDocument/implementation`]         | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
-[`textDocument/documentColor`]          | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
-[`textDocument/colorPresentation`]      | :leftwards_arrow_with_hook: | :green_circle: | ~[#10]~
+[`workspace/workspaceFolders`]          | :arrow_right_hook:          | :green_circle: | ~[o#13]~
+[`workspace/didChangeWorkspaceFolders`] | :arrow_right:               | :green_circle: | ~[o#8]~
+[`workspace/configuration`]             | :arrow_right_hook:          | :green_circle: | ~[o#13]~
+[`textDocument/typeDefinition`]         | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
+[`textDocument/implementation`]         | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
+[`textDocument/documentColor`]          | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
+[`textDocument/colorPresentation`]      | :leftwards_arrow_with_hook: | :green_circle: | ~[o#10]~
 
 [`workspace/workspaceFolders`]: https://microsoft.github.io/language-server-protocol/specification#workspace_workspaceFolders
 [`workspace/didChangeWorkspaceFolders`]: https://microsoft.github.io/language-server-protocol/specification#workspace_didChangeWorkspaceFolders
@@ -204,9 +207,9 @@ Method Name                             | Message Type                | Supporte
 [`textDocument/documentColor`]: https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor
 [`textDocument/colorPresentation`]: https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation
 
-[#8]: https://github.com/ebkalderon/tower-lsp/issues/8
-[#10]: https://github.com/ebkalderon/tower-lsp/issues/10
-[#13]: https://github.com/ebkalderon/tower-lsp/issues/13
+[o#8]: https://github.com/ebkalderon/tower-lsp/issues/8
+[o#10]: https://github.com/ebkalderon/tower-lsp/issues/10
+[o#13]: https://github.com/ebkalderon/tower-lsp/issues/13
 
 ## [3.0.0] - 2017-02-08
 
@@ -216,44 +219,44 @@ Method Name                          | Message Type                | Supported  
 -------------------------------------|:---------------------------:|:-------------------:|------------------
 [`initialize`]                       | :leftwards_arrow_with_hook: | :green_circle:      |
 [`initialized`]                      | :arrow_right:               | :green_circle:      |
-[`client/registerCapability`]        | :arrow_right_hook:          | :green_circle:      | ~[#13]~
-[`client/unregisterCapability`]      | :arrow_right_hook:          | :green_circle:      | ~[#13]~
+[`client/registerCapability`]        | :arrow_right_hook:          | :green_circle:      | ~[o#13]~
+[`client/unregisterCapability`]      | :arrow_right_hook:          | :green_circle:      | ~[o#13]~
 [`shutdown`]                         | :leftwards_arrow_with_hook: | :green_circle:      |
 [`exit`]                             | :arrow_right:               | :green_circle:      |
 [`textDocument/didOpen`]             | :arrow_right:               | :green_circle:      |
 [`textDocument/didChange`]           | :arrow_right:               | :green_circle:      |
-[`textDocument/willSave`]            | :arrow_right:               | :green_circle:      | ~[#118]~
-[`textDocument/willSaveWaitUntil`]   | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
+[`textDocument/willSave`]            | :arrow_right:               | :green_circle:      | ~[o#118]~
+[`textDocument/willSaveWaitUntil`]   | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
 [`textDocument/didSave`]             | :arrow_right:               | :green_circle:      |
 [`textDocument/didClose`]            | :arrow_right:               | :green_circle:      |
-[`textDocument/definition`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/references`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
+[`textDocument/definition`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/references`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
 [`textDocument/documentHighlight`]   | :leftwards_arrow_with_hook: | :green_circle:      |
-[`textDocument/documentLink`]        | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`documentLink/resolve`]             | :leftwards_arrow_with_hook: | :green_circle:      | ~[#12]~
+[`textDocument/documentLink`]        | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`documentLink/resolve`]             | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#12]~
 [`textDocument/hover`]               | :leftwards_arrow_with_hook: | :green_circle:      |
-[`textDocument/codeLens`]            | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`codeLens/resolve`]                 | :leftwards_arrow_with_hook: | :green_circle:      | ~[#11]~
-[`textDocument/documentSymbol`]      | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/completion`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`completionItem/resolve`]           | :leftwards_arrow_with_hook: | :green_circle:      | ~[#9]~
+[`textDocument/codeLens`]            | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`codeLens/resolve`]                 | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#11]~
+[`textDocument/documentSymbol`]      | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/completion`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`completionItem/resolve`]           | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#9]~
 [`textDocument/publishDiagnostics`]  | :arrow_left:                | :green_circle:      |
-[`textDocument/signatureHelp`]       | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/codeAction`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/formatting`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/rangeFormatting`]     | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/onTypeFormatting`]    | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`textDocument/rename`]              | :leftwards_arrow_with_hook: | :green_circle:      | ~[#10]~
-[`workspace/symbol`]                 | :leftwards_arrow_with_hook: | :green_circle:      | ~[#8]~
-[`workspace/didChangeConfiguration`] | :arrow_right:               | :green_circle:      | ~[#8]~
-[`workspace/didChangeWatchedFiles`]  | :arrow_right:               | :green_circle:      | ~[#8]~
-[`workspace/executeCommand`]         | :leftwards_arrow_with_hook: | :green_circle:      | ~[#8]~
-[`workspace/applyEdit`]              | :arrow_right_hook:          | :green_circle:      | ~[#13]~
+[`textDocument/signatureHelp`]       | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/codeAction`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/formatting`]          | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/rangeFormatting`]     | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/onTypeFormatting`]    | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`textDocument/rename`]              | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#10]~
+[`workspace/symbol`]                 | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#8]~
+[`workspace/didChangeConfiguration`] | :arrow_right:               | :green_circle:      | ~[o#8]~
+[`workspace/didChangeWatchedFiles`]  | :arrow_right:               | :green_circle:      | ~[o#8]~
+[`workspace/executeCommand`]         | :leftwards_arrow_with_hook: | :green_circle:      | ~[o#8]~
+[`workspace/applyEdit`]              | :arrow_right_hook:          | :green_circle:      | ~[o#13]~
 [`window/showMessage`]               | :arrow_left:                | :green_circle:      |
-[`window/showMessageRequest`]        | :arrow_right_hook:          | :green_circle:      | ~[#13]~
+[`window/showMessageRequest`]        | :arrow_right_hook:          | :green_circle:      | ~[o#13]~
 [`window/logMessage`]                | :arrow_left:                | :green_circle:      |
 [`telemetry/event`]                  | :arrow_left:                | :green_circle:      |
-[`$/cancelRequest`]                  | :arrow_right: :arrow_left:  | :yellow_circle:[^1] | ~[#145]~, [#231]
+[`$/cancelRequest`]                  | :arrow_right: :arrow_left:  | :yellow_circle:[^1] | ~[o#145]~, ~[o#231]~
 
 [`initialize`]: https://microsoft.github.io/language-server-protocol/specification#initialize
 [`initialized`]: https://microsoft.github.io/language-server-protocol/specification#initialized
@@ -299,15 +302,15 @@ Method Name                          | Message Type                | Supported  
 [^1]: Server-to-client `$/cancelRequest` support is not yet implemented. However, the raw message can be emitted manually using `Client::send_notification()`.
       Client-to-server support is implemented via async/await task cancellation.
 
-[#8]: https://github.com/ebkalderon/tower-lsp/issues/8
-[#9]: https://github.com/ebkalderon/tower-lsp/issues/9
-[#10]: https://github.com/ebkalderon/tower-lsp/issues/10
-[#11]: https://github.com/ebkalderon/tower-lsp/issues/11
-[#12]: https://github.com/ebkalderon/tower-lsp/issues/12
-[#13]: https://github.com/ebkalderon/tower-lsp/issues/13
-[#118]: https://github.com/ebkalderon/tower-lsp/issues/118
-[#145]: https://github.com/ebkalderon/tower-lsp/issues/145
-[#231]: https://github.com/ebkalderon/tower-lsp/issues/231
+[o#8]: https://github.com/ebkalderon/tower-lsp/issues/8
+[o#9]: https://github.com/ebkalderon/tower-lsp/issues/9
+[o#10]: https://github.com/ebkalderon/tower-lsp/issues/10
+[o#11]: https://github.com/ebkalderon/tower-lsp/issues/11
+[o#12]: https://github.com/ebkalderon/tower-lsp/issues/12
+[o#13]: https://github.com/ebkalderon/tower-lsp/issues/13
+[o#118]: https://github.com/ebkalderon/tower-lsp/issues/118
+[o#145]: https://github.com/ebkalderon/tower-lsp/issues/145
+[o#231]: https://github.com/ebkalderon/tower-lsp/issues/231
 
 [3.17.0]: https://microsoft.github.io/language-server-protocol/specification#version_3_17_0
 [3.16.0]: https://microsoft.github.io/language-server-protocol/specification#version_3_16_0
