@@ -32,7 +32,9 @@ impl Pending {
                         _ => entry.get_mut().remove(0),
                     };
 
-                    tx.send(r).expect("receiver already dropped");
+                    // ignore error in case the request is cancelled and
+                    // the rx was dropped
+                    let _ = tx.send(r);
                 }
             },
         }
