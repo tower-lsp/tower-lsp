@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+* Do no panic when recieving a response whose request has been cancelled (#37)
+
 ## [0.21.0] - 2025-03-16
 
 ### Added
