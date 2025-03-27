@@ -82,7 +82,7 @@ impl<S: LanguageServer> LspService<S> {
         let pending = Arc::new(Pending::new());
 
         LspServiceBuilder {
-            inner: crate::generated::register_lsp_methods(
+            inner: crate::server::generated::register_lsp_methods(
                 inner,
                 state.clone(),
                 pending.clone(),
