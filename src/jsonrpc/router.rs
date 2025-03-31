@@ -207,10 +207,13 @@ pub trait FromParams: private::Sealed + Send + Sized + 'static {
 /// Deserialize non-existent JSON-RPC parameters.
 impl FromParams for () {
     fn from_params(params: Option<LSPAny>) -> super::Result<Self> {
-        if let Some(p) = params {
-            Err(Error::invalid_params(format!("Unexpected params: {p}")))
-        } else {
-            Ok(())
+        match params {
+            None => Ok(()),
+            // See #40: allow lsp clients (e.g. `lsp4j`) to not precisely
+            // respect the specification and set `params` to `null` when it
+            // should not be present at all.
+            Some(LSPAny::Null) => Ok(()),
+            Some(p) => Err(Error::invalid_params(format!("Unexpected params: {p}"))),
         }
     }
 }
